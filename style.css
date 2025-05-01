@@ -1,0 +1,105 @@
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: #f7f7f7;
+}
+
+h1, h3 {
+    color: #333;
+}
+
+.card-header {
+    background-color: #4CAF50;
+    color: white;
+}
+
+.card-title {
+    font-weight: 600;
+}
+
+.table-bordered {
+    border: 1px solid #ddd;
+}
+
+button {
+    font-size: 1.2rem;
+}
+
+form input, form select {
+    font-size: 1.1rem;
+}
+
+form button:hover {
+    background-color: #45a049;
+}
+
+/* Grafikka responsive dizayn */
+#meal-chart {
+    position: relative;
+    width: 100%;
+    height: 300px;
+    max-height: 400px; /* O'lchamni cheklash */
+    background-color: white;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+}
+
+/* Jadval dizayni */
+#meal-table {
+    margin-top: 20px;
+    border-radius: 8px;
+}
+
+.table th, .table td {
+    text-align: center;
+    font-size: 1.1rem;
+}
+
+.card-body {
+    padding: 1.5rem;
+}
+
+.card {
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Formani chiroyli qilish */
+form input, form select {
+    border-radius: 5px;
+    box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.1);
+}
+
+/* Formani submit tugmasi */
+form button {
+    font-weight: bold;
+    background-color: #4CAF50;
+    color: white;
+    border-radius: 5px;
+    border: none;
+    transition: background-color 0.3s;
+}
+
+form button:hover {
+    background-color: #45a049;
+}
+
+/* Textlar va kartochkalar o'rtasida masofa */
+.card-body {
+    margin-top: 1.2rem;
+}
+
+/* Grafikni va jadvalni maxsus bo'limda to'g'ri joylash*/
+.row {
+    display: flex;
+    justify-content: space-between;
+}
+
+.col-md-6 {
+    flex: 0 0 48%;
+}
+
+/* Grafikda kattalashtirishning cheklovlari */
+canvas {
+    width: 100% !important;
+    height: auto !important;
+}
