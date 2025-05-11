@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+  <meta charset="UTF-8">
+  <title>Ovqat Monitoring Tizimi</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    * {
+      box-sizing: border-box;
+      font-family: 'Inter', sans-serif;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      overflow-x: hidden;
+      color: #f0f0f0;
+    }
+
+    /* BACKGROUND ANIMATION */
+    #bg-animation {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -2;
+      background: linear-gradient(135deg, #2c3e50, #4b4b4b);
+      animation: gradientBG 20s ease infinite;
+      background-size: 400% 400%;
+    }
+
+    @keyframes gradientBG {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    /* PARTICLE CANVAS */
+    #particles-js {
+      position: fixed;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+    }
+
+    header {
+      padding: 2rem;
+      text-align: center;
+      background: rgba(0, 0, 0, 0.6);
+      box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+    }
+
+    h1 {
+      margin: 0;
+      font-size: 2rem;
+      color: #ffffff;
+    }
+
+    .container {
+      padding: 2rem;
+      max-width: 1100px;
+      margin: auto;
+    }
+
+    input, select, button {
+      padding: 0.75rem 1rem;
+      margin: 0.5rem;
+      border-radius: 10px;
+      border: 1px solid #666;
+      font-size: 1rem;
+      background: #2f2f2f;
+      color: #eee;
+    }
+
+    button {
+      background-color: #6c5ce7;
+      color: white;
+      cursor: pointer;
+      transition: background 0.2s ease;
+    }
+
+    button:hover {
+      background-color: #4834d4;
+    }
+
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .card {
+      background: rgba(255,255,255,0.05);
+      border-radius: 15px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+      padding: 1.5rem;
+      position: relative;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      backdrop-filter: blur(5px);
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 12px 25px rgba(0,0,0,0.5);
+    }
+
+    .card h3 {
+      color: #81ecec;
+    }
+
+    .delete-btn {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background: #e74c3c;
+      border: none;
+      border-radius: 50%;
+      color: white;
+      width: 25px;
+      height: 25px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    footer {
+      text-align: center;
+      padding: 1rem;
+      color: #aaa;
+      font-size: 0.9rem;
+      background: rgba(0,0,0,0.4);
+    }
+
+    #statsBox {
+      text-align: center;
+      margin-top: 2rem;
+      background: rgba(255,255,255,0.05);
+      padding: 1rem;
+      border-radius: 10px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    }
+
+    #statsBox h2 {
+      color: #00cec9;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ANIMATED BACKGROUND -->
+  <div id="bg-animation"></div>
+  <div id="particles-js"></div>
+
+  <header>
+    <h1>🍽️ Ovqatlanish Monitoring Tizimi</h1>
+  </header>
+
+  <div class="container">
+
+    <div class="search-box">
+      <input type="text" id="searchInput" placeholder="Ovqat nomini kiriting...">
+      <select id="filterByTime">
+        <option value="">🧾 Barchasi</option>
+        <option value="Ertalab">Ertalab</option>
+        <option value="Tushlik">Tushlik</option>
+        <option value="Kechki ovqat">Kechki ovqat</option>
+      </select>
+    </div>
+
+    <div class="form-box">
+      <h2>➕ Yangi Ovqat Qo‘shish</h2>
+      <input type="text" id="newName" placeholder="Ovqat nomi">
+      <input type="number" id="newCalories" placeholder="Kaloriya">
+      <input type="text" id="newTime" placeholder="Masalan: Tushlik">
+      <input type="date" id="newDate">
+      <button onclick="addFood()">Qo‘shish</button>
+    </div>
+
+    <div class="card-grid" id="foodCards"></div>
+    <div id="statsBox"></div>
+  </div>
+
+  <footer>
+    &copy; 2025 OvqatTrack. Barcha huquqlar himoyalangan.
+  </footer>
+
+  <!-- JAVASCRIPT LOGIKA -->
+  <script>
+    const foods = JSON.parse(localStorage.getItem('foods')) || [];
+
+    const cardContainer = document.getElementById('foodCards');
+    const searchInput = document.getElementById('searchInput');
+    const filterByTime = document.getElementById('filterByTime');
+
+    function saveFoods() {
+      localStorage.setItem('foods', JSON.stringify(foods));
+    }
+
+    function renderCards(data) {
+      cardContainer.innerHTML = '';
+      data.forEach((food, index) => {
+        const card = document.createElement('div');
+        card.className = 'card';
+        card.innerHTML = `
+          <button class="delete-btn" onclick="deleteFood(${index})">×</button>
+          <h3>${food.name}</h3>
+          <p><strong>Kaloriya:</strong> ${food.calories} kcal</p>
+          <p><strong>Vaqti:</strong> ${food.time}</p>
+          <p><strong>Sana:</strong> ${food.date}</p>
+        `;
+        cardContainer.appendChild(card);
+      });
+      updateStats(data);
+    }
+
+    function addFood() {
+      const name = document.getElementById('newName').value.trim();
+      const calories = parseInt(document.getElementById('newCalories').value);
+      const time = document.getElementById('newTime').value.trim();
+      const date = document.getElementById('newDate').value;
+
+      if (name && calories && time && date) {
+        foods.push({ name, calories, time, date });
+        saveFoods();
+        renderCards(foods);
+        document.getElementById('newName').value = '';
+        document.getElementById('newCalories').value = '';
+        document.getElementById('newTime').value = '';
+        document.getElementById('newDate').value = '';
+      } else {
+        alert("Iltimos, barcha maydonlarni to‘ldiring.");
+      }
+    }
+
+    function deleteFood(index) {
+      if (confirm("Rostdan ham o‘chirmoqchimisiz?")) {
+        foods.splice(index, 1);
+        saveFoods();
+        renderCards(foods);
+      }
+    }
+
+    function updateStats(data) {
+      const stats = {};
+      data.forEach(f => {
+        if (!stats[f.date]) stats[f.date] = 0;
+        stats[f.date] += f.calories;
+      });
+
+      const statsBox = document.getElementById('statsBox');
+      statsBox.innerHTML = `<h2>📊 Kaloriya Statistikasi</h2>`;
+      for (let date in stats) {
+        statsBox.innerHTML += `<p><strong>${date}:</strong> ${stats[date]} kcal</p>`;
+      }
+    }
+
+    function filterFoods() {
+      const keyword = searchInput.value.toLowerCase();
+      const selectedTime = filterByTime.value;
+
+      const filtered = foods.filter(f => {
+        return (
+          (f.name.toLowerCase().includes(keyword) ||
+          f.time.toLowerCase().includes(keyword) ||
+          f.date.includes(keyword)) &&
+          (selectedTime ? f.time === selectedTime : true)
+        );
+      });
+
+      renderCards(filtered);
+    }
+
+    searchInput.addEventListener('input', filterFoods);
+    filterByTime.addEventListener('change', filterFoods);
+
+    renderCards(foods);
+  </script>
+
+  <!-- PARTICLES.JS -->
+  <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+  <script>
+    particlesJS("particles-js", {
+      "particles": {
+        "number": {
+          "value": 80,
+          "density": {
+            "enable": true,
+            "value_area": 800
+          }
+        },
+        "color": { "value": "#ffffff" },
+        "shape": {
+          "type": "circle",
+          "stroke": { "width": 0, "color": "#000000" }
+        },
+        "opacity": {
+          "value": 0.5,
+          "random": false
+        },
+        "size": {
+          "value": 3,
+          "random": true
+        },
+        "line_linked": {
+          "enable": true,
+          "distance": 150,
+          "color": "#ffffff",
+          "opacity": 0.4,
+          "width": 1
+        },
+        "move": {
+          "enable": true,
+          "speed": 4,
+          "direction": "none",
+          "out_mode": "out"
+        }
+      },
+      "interactivity": {
+        "events": {
+          "onhover": {
+            "enable": true,
+            "mode": "grab"
+          }
+        }
+      },
+      "retina_detect": true
+    });
+  </script>
+
+</body>
+</html>
