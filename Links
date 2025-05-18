@@ -5,7 +5,7 @@
   <title>Ovqat Monitoring Tizimi</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
-  <script src="https://cdn.jsdelivr.net/npm/particles.js"></script> <!-- Particles.js uchun link -->
+  <script src="https://cdn.jsdelivr.net/npm/particles.js"></script>
   <style>
     * {
       box-sizing: border-box;
@@ -125,291 +125,229 @@
     #statsBox h2 {
       color: #00cec9;
     }
+    #suggestionBox {
+      text-align: center;
+      margin-top: 1rem;
+      background: rgba(255,255,255,0.07);
+      padding: 1rem;
+      border-radius: 10px;
+      font-size: 1rem;
+    }
   </style>
 </head>
 <body>
 
-  <div id="bg-animation"></div>
-  <div id="particles-js"></div>
+<div id="bg-animation"></div>
+<div id="particles-js"></div>
 
-  <header>
-    <h1>🍽️ Ovqatlanish Monitoring Tizimi</h1>
-  </header>
+<header>
+  <h1>🍽️ Ovqatlanish Monitoring Tizimi</h1>
+</header>
 
-  <!-- LOGIN / REGISTER FORM -->
-  <div class="container" id="authContainer">
-    <div id="loginForm">
-      <h2>🔐 Kirish</h2>
-      <input type="text" id="loginUsername" placeholder="Foydalanuvchi nomi">
-      <input type="password" id="loginPassword" placeholder="Parol">
-      <button onclick="login()">Kirish</button>
-      <p>Ro'yxatdan o'tmaganmisiz? <a href="#" onclick="showRegister()">Ro‘yxatdan o‘tish</a></p>
-    </div>
-    <div id="registerForm" style="display: none;">
-      <h2>📝 Ro‘yxatdan O‘tish</h2>
-      <input type="text" id="registerUsername" placeholder="Yangi foydalanuvchi nomi">
-      <input type="password" id="registerPassword" placeholder="Parol">
-      <select id="gender">
-        <option value="">Jinsingizni tanlang</option>
-        <option value="Erkak">Erkak</option>
-        <option value="Ayol">Ayol</option>
-      </select>
-      <button onclick="register()">Ro‘yxatdan o‘tish</button>
-      <p>Allaqachon ro‘yxatdan o‘tgansizmi? <a href="#" onclick="showLogin()">Kirish</a></p>
-    </div>
+<div class="container" id="authContainer">
+  <div id="loginForm">
+    <h2>🔐 Kirish</h2>
+    <input type="text" id="loginUsername" placeholder="Foydalanuvchi nomi">
+    <input type="password" id="loginPassword" placeholder="Parol">
+    <button onclick="login()">Kirish</button>
+    <p>Ro'yxatdan o'tmaganmisiz? <a href="#" onclick="showRegister()">Ro‘yxatdan o‘tish</a></p>
   </div>
-
-  <!-- MAIN APP -->
-  <div class="container" id="mainApp" style="display: none;">
-    <div class="search-box">
-      <input type="text" id="searchInput" placeholder="Ovqat nomini kiriting...">
-      <select id="filterByTime">
-        <option value="">🧾 Barchasi</option>
-        <option value="Ertalab">Ertalab</option>
-        <option value="Tushlik">Tushlik</option>
-        <option value="Kechki ovqat">Kechki ovqat</option>
-      </select>
-    </div>
-    <div class="form-box">
-      <h2>➕ Yangi Ovqat Qo‘shish</h2>
-      <input type="text" id="newName" placeholder="Ovqat nomi">
-      <input type="number" id="newCalories" placeholder="Kaloriya">
-      <input type="number" id="newProtein" placeholder="Protein">
-      <input type="number" id="newFat" placeholder="Yog‘lar">
-      <input type="number" id="newCarbs" placeholder="Uglevodlar">
-      <input type="text" id="newTime" placeholder="Masalan: Tushlik">
-      <input type="date" id="newDate">
-      <button onclick="addFood()">Qo‘shish</button>
-    </div>
-    <div class="card-grid" id="foodCards"></div>
-    <div id="statsBox"></div>
+  <div id="registerForm" style="display: none;">
+    <h2>📝 Ro‘yxatdan O‘tish</h2>
+    <input type="text" id="registerUsername" placeholder="Yangi foydalanuvchi nomi">
+    <input type="password" id="registerPassword" placeholder="Parol">
+    <input type="number" id="age" placeholder="Yoshingiz">
+    <input type="text" id="job" placeholder="Kasbingiz (Masalan: Dasturchi)">
+    <select id="gender">
+      <option value="">Jinsingizni tanlang</option>
+      <option value="Erkak">Erkak</option>
+      <option value="Ayol">Ayol</option>
+    </select>
+    <button onclick="register()">Ro‘yxatdan o‘tish</button>
+    <p>Allaqachon ro‘yxatdan o‘tgansizmi? <a href="#" onclick="showLogin()">Kirish</a></p>
   </div>
+</div>
 
-  <footer>
-    &copy; 2025 OvqatTrack. Barcha huquqlar himoyalangan.
-  </footer>
+<div class="container" id="mainApp" style="display: none;">
+  <div id="suggestionBox"></div>
+  <div class="search-box">
+    <input type="text" id="searchInput" placeholder="Ovqat nomini kiriting...">
+    <select id="filterByTime">
+      <option value="">🧾 Barchasi</option>
+      <option value="Ertalab">Ertalab</option>
+      <option value="Tushlik">Tushlik</option>
+      <option value="Kechki ovqat">Kechki ovqat</option>
+    </select>
+  </div>
+  <div class="form-box">
+    <h2>➕ Yangi Ovqat Qo‘shish</h2>
+    <input type="text" id="newName" placeholder="Ovqat nomi">
+    <input type="number" id="newCalories" placeholder="Kaloriya">
+    <input type="number" id="newProtein" placeholder="Protein">
+    <input type="number" id="newFat" placeholder="Yog‘lar">
+    <input type="number" id="newCarbs" placeholder="Uglevodlar">
+    <input type="text" id="newTime" placeholder="Masalan: Tushlik">
+    <input type="date" id="newDate">
+    <button onclick="addFood()">Qo‘shish</button>
+  </div>
+  <div class="card-grid" id="foodCards"></div>
+  <div id="statsBox"></div>
+</div>
 
-  <script>
-    // Particles.js konfiguratsiyasi
-    particlesJS("particles-js", {
-      particles: {
-        number: {
-          value: 80,
-          density: {
-            enable: true,
-            value_area: 800
-          }
-        },
-        color: {
-          value: "#ffffff"
-        },
-        shape: {
-          type: "circle",
-          stroke: {
-            width: 0,
-            color: "#ffffff"
-          },
-          polygon: {
-            nb_sides: 5
-          }
-        },
-        opacity: {
-          value: 0.5,
-          random: true,
-          anim: {
-            enable: true,
-            speed: 1,
-            opacity_min: 0.1,
-            sync: false
-          }
-        },
-        size: {
-          value: 3,
-          random: true,
-          anim: {
-            enable: false,
-            speed: 4,
-            size_min: 0.1,
-            sync: false
-          }
-        },
-        line_linked: {
-          enable: true,
-          distance: 150,
-          color: "#ffffff",
-          opacity: 0.4,
-          width: 1
-        },
-        move: {
-          enable: true,
-          speed: 6,
-          direction: "none",
-          random: false,
-          straight: false,
-          out_mode: "out",
-          bounce: false
-        }
-      },
-      interactivity: {
-        detect_on: "window",
-        events: {
-          onhover: {
-            enable: true,
-            mode: "repulse"
-          },
-          onclick: {
-            enable: true,
-            mode: "push"
-          }
-        },
-        modes: {
-          repulse: {
-            distance: 100,
-            duration: 0.4
-          },
-          push: {
-            particles_nb: 4
-          }
-        }
-      },
-      retina_detect: true
-    });
+<footer>
+  &copy; 2025 OvqatTrack. Barcha huquqlar himoyalangan.
+</footer>
 
-    // LOGIN & REGISTER
-    function showRegister() {
-      document.getElementById('loginForm').style.display = 'none';
-      document.getElementById('registerForm').style.display = 'block';
+<script>
+  // Particles.js config
+  particlesJS("particles-js", {
+    particles: { number: { value: 80, density: { enable: true, value_area: 800 } }, color: { value: "#ffffff" }, shape: { type: "circle" }, opacity: { value: 0.5, random: true }, size: { value: 3, random: true }, line_linked: { enable: true, distance: 150, color: "#ffffff", opacity: 0.4, width: 1 }, move: { enable: true, speed: 6 } },
+    interactivity: { detect_on: "window", events: { onhover: { enable: true, mode: "repulse" }, onclick: { enable: true, mode: "push" } }, modes: { repulse: { distance: 100, duration: 0.4 }, push: { particles_nb: 4 } } },
+    retina_detect: true
+  });
+
+  function showRegister() {
+    document.getElementById('loginForm').style.display = 'none';
+    document.getElementById('registerForm').style.display = 'block';
+  }
+
+  function showLogin() {
+    document.getElementById('registerForm').style.display = 'none';
+    document.getElementById('loginForm').style.display = 'block';
+  }
+
+  function register() {
+    const username = document.getElementById('registerUsername').value.trim();
+    const password = document.getElementById('registerPassword').value.trim();
+    const gender = document.getElementById('gender').value;
+    const age = parseInt(document.getElementById('age').value);
+    const job = document.getElementById('job').value.trim();
+
+    if (username && password && gender && age && job) {
+      localStorage.setItem('user', JSON.stringify({ username, password, gender, age, job }));
+      alert("Ro‘yxatdan o‘tish muvaffaqiyatli yakunlandi.");
+      showLogin();
+    } else {
+      alert("Iltimos, barcha maydonlarni to‘ldiring.");
     }
+  }
 
-    function showLogin() {
-      document.getElementById('registerForm').style.display = 'none';
-      document.getElementById('loginForm').style.display = 'block';
+  function login() {
+    const username = document.getElementById('loginUsername').value.trim();
+    const password = document.getElementById('loginPassword').value.trim();
+    const storedUser = JSON.parse(localStorage.getItem('user'));
+
+    if (storedUser && storedUser.username === username && storedUser.password === password) {
+      alert(`Xush kelibsiz, hurmatli ${storedUser.age} yoshli ${storedUser.job} (${storedUser.gender})!`);
+      document.getElementById('authContainer').style.display = 'none';
+      document.getElementById('mainApp').style.display = 'block';
+      showSuggestion(storedUser);
+      renderCards(foods);
+    } else {
+      alert("Login yoki parol noto‘g‘ri.");
     }
+  }
 
-    function register() {
-      const username = document.getElementById('registerUsername').value.trim();
-      const password = document.getElementById('registerPassword').value.trim();
-      const gender = document.getElementById('gender').value;
-
-      if (username && password && gender) {
-        localStorage.setItem('user', JSON.stringify({ username, password, gender }));
-        alert("Ro‘yxatdan o‘tish muvaffaqiyatli yakunlandi.");
-        showLogin();
-      } else {
-        alert("Iltimos, barcha maydonlarni to‘ldiring.");
-      }
+  function showSuggestion(user) {
+    let text = '';
+    if (user.age < 18) {
+      text = '🧒 Siz o‘smir ekansiz. Mevalar, sabzavotlar va sut mahsulotlarini ko‘proq iste’mol qiling.';
+    } else if (user.age >= 18 && user.age < 40) {
+      text = '🧑 Siz faol yoshdasiz. Muvozanatli ovqatlanish va oqsilga boy mahsulotlar muhim.';
+    } else {
+      text = '👴 Siz kattaroq yoshdasiz. Yog‘ va shirinliklarni cheklab, ko‘proq sabzavotlar iste’mol qiling.';
     }
+    document.getElementById('suggestionBox').innerHTML = `<h3>🍽️ Tavsiya:</h3><p>${text}</p>`;
+  }
 
-    function login() {
-      const username = document.getElementById('loginUsername').value.trim();
-      const password = document.getElementById('loginPassword').value.trim();
-      const storedUser = JSON.parse(localStorage.getItem('user'));
+  const foods = JSON.parse(localStorage.getItem('foods')) || [];
+  const cardContainer = document.getElementById('foodCards');
+  const searchInput = document.getElementById('searchInput');
+  const filterByTime = document.getElementById('filterByTime');
 
-      if (storedUser && storedUser.username === username && storedUser.password === password) {
-        alert(`Xush kelibsiz, ${storedUser.gender} foydalanuvchi!`);
-        document.getElementById('authContainer').style.display = 'none';
-        document.getElementById('mainApp').style.display = 'block';
-        renderCards(foods);
-      } else {
-        alert("Login yoki parol noto‘g‘ri.");
-      }
-    }
+  function saveFoods() {
+    localStorage.setItem('foods', JSON.stringify(foods));
+  }
 
-    // FOOD LOGIC
-    const foods = JSON.parse(localStorage.getItem('foods')) || [];
-    const cardContainer = document.getElementById('foodCards');
-    const searchInput = document.getElementById('searchInput');
-    const filterByTime = document.getElementById('filterByTime');
-
-    function saveFoods() {
-      localStorage.setItem('foods', JSON.stringify(foods));
-    }
-
-    function renderCards(data) {
-      cardContainer.innerHTML = '';
-      data.forEach((food, index) => {
-        const card = document.createElement('div');
-        card.className = 'card';
-        card.innerHTML = `
-          <button class="delete-btn" onclick="deleteFood(${index})">×</button>
-          <h3>${food.name}</h3>
-          <p><strong>Kaloriya:</strong> ${food.calories} kcal</p>
-          <p><strong>Protein:</strong> ${food.protein} g</p>
-          <p><strong>Yog‘lar:</strong> ${food.fat} g</p>
-          <p><strong>Uglevodlar:</strong> ${food.carbs} g</p>
-          <p><strong>Vaqti:</strong> ${food.time}</p>
-          <p><strong>Sana:</strong> ${food.date}</p>
-        `;
-        cardContainer.appendChild(card);
-      });
-      updateStats(data);
-    }
-
-    function addFood() {
-      const name = document.getElementById('newName').value.trim();
-      const calories = parseInt(document.getElementById('newCalories').value);
-      const protein = parseInt(document.getElementById('newProtein').value);
-      const fat = parseInt(document.getElementById('newFat').value);
-      const carbs = parseInt(document.getElementById('newCarbs').value);
-      const time = document.getElementById('newTime').value.trim();
-      const date = document.getElementById('newDate').value;
-
-      if (name && calories && protein && fat && carbs && time && date) {
-        foods.push({ name, calories, protein, fat, carbs, time, date });
-        saveFoods();
-        renderCards(foods);
-        document.getElementById('newName').value = '';
-        document.getElementById('newCalories').value = '';
-        document.getElementById('newProtein').value = '';
-        document.getElementById('newFat').value = '';
-        document.getElementById('newCarbs').value = '';
-        document.getElementById('newTime').value = '';
-        document.getElementById('newDate').value = '';
-      }
-    }
-
-    function deleteFood(index) {
-      if (confirm('Ushbu ovqatni o‘chirishni istaysizmi?')) {
-        foods.splice(index, 1);
-        saveFoods();
-        renderCards(foods);
-      }
-    }
-
-    function updateStats(data) {
-      let totalCalories = 0, totalProtein = 0, totalFat = 0, totalCarbs = 0;
-
-      data.forEach(food => {
-        totalCalories += food.calories;
-        totalProtein += food.protein || 0;
-        totalFat += food.fat || 0;
-        totalCarbs += food.carbs || 0;
-      });
-
-      const statsBox = document.getElementById('statsBox');
-      statsBox.innerHTML = `
-        <h2>📊 Ovqatlanish Statistikasi</h2>
-        <p><strong>Umumiy kaloriyalar:</strong> ${totalCalories} kcal</p>
-        <p><strong>O‘tkazilgan proteinlar:</strong> ${totalProtein} g</p>
-        <p><strong>Yog‘lar:</strong> ${totalFat} g</p>
-        <p><strong>Uglevodlar:</strong> ${totalCarbs} g</p>
+  function renderCards(data) {
+    cardContainer.innerHTML = '';
+    data.forEach((food, index) => {
+      const card = document.createElement('div');
+      card.className = 'card';
+      card.innerHTML = `
+        <button class="delete-btn" onclick="deleteFood(${index})">×</button>
+        <h3>${food.name}</h3>
+        <p><strong>Kaloriya:</strong> ${food.calories} kcal</p>
+        <p><strong>Protein:</strong> ${food.protein} g</p>
+        <p><strong>Yog‘lar:</strong> ${food.fat} g</p>
+        <p><strong>Uglevodlar:</strong> ${food.carbs} g</p>
+        <p><strong>Vaqti:</strong> ${food.time}</p>
+        <p><strong>Sana:</strong> ${food.date}</p>
       `;
+      cardContainer.appendChild(card);
+    });
+    updateStats(data);
+  }
+
+  function addFood() {
+    const name = document.getElementById('newName').value.trim();
+    const calories = parseInt(document.getElementById('newCalories').value);
+    const protein = parseInt(document.getElementById('newProtein').value);
+    const fat = parseInt(document.getElementById('newFat').value);
+    const carbs = parseInt(document.getElementById('newCarbs').value);
+    const time = document.getElementById('newTime').value.trim();
+    const date = document.getElementById('newDate').value;
+
+    if (name && calories && protein && fat && carbs && time && date) {
+      foods.push({ name, calories, protein, fat, carbs, time, date });
+      saveFoods();
+      renderCards(foods);
+      document.getElementById('newName').value = '';
+      document.getElementById('newCalories').value = '';
+      document.getElementById('newProtein').value = '';
+      document.getElementById('newFat').value = '';
+      document.getElementById('newCarbs').value = '';
+      document.getElementById('newTime').value = '';
+      document.getElementById('newDate').value = '';
     }
+  }
 
-    // Search and Filter
-    searchInput.addEventListener('input', function() {
-      const filteredFoods = foods.filter(food => food.name.toLowerCase().includes(searchInput.value.toLowerCase()));
-      renderCards(filteredFoods);
+  function deleteFood(index) {
+    if (confirm('Ushbu ovqatni o‘chirishni istaysizmi?')) {
+      foods.splice(index, 1);
+      saveFoods();
+      renderCards(foods);
+    }
+  }
+
+  function updateStats(data) {
+    let totalCalories = 0, totalProtein = 0, totalFat = 0, totalCarbs = 0;
+    data.forEach(food => {
+      totalCalories += food.calories;
+      totalProtein += food.protein;
+      totalFat += food.fat;
+      totalCarbs += food.carbs;
     });
+    document.getElementById('statsBox').innerHTML = `
+      <h2>📊 Ovqatlanish Statistikasi</h2>
+      <p><strong>Umumiy kaloriyalar:</strong> ${totalCalories} kcal</p>
+      <p><strong>O‘tkazilgan proteinlar:</strong> ${totalProtein} g</p>
+      <p><strong>Yog‘lar:</strong> ${totalFat} g</p>
+      <p><strong>Uglevodlar:</strong> ${totalCarbs} g</p>
+    `;
+  }
 
-    filterByTime.addEventListener('change', function() {
-      const filteredFoods = foods.filter(food => food.time === filterByTime.value || filterByTime.value === '');
-      renderCards(filteredFoods);
-    });
+  searchInput.addEventListener('input', function() {
+    const filteredFoods = foods.filter(food => food.name.toLowerCase().includes(searchInput.value.toLowerCase()));
+    renderCards(filteredFoods);
+  });
 
-    // Initial render
-    renderCards(foods);
-  </script>
+  filterByTime.addEventListener('change', function() {
+    const filteredFoods = foods.filter(food => food.time === filterByTime.value || filterByTime.value === '');
+    renderCards(filteredFoods);
+  });
 
+  renderCards(foods);
+</script>
 </body>
-</html
+</html>
