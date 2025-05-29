@@ -209,21 +209,31 @@
 
   <!-- Profil tugmasi va modal tashqarida joylashgan -->
   <button id="profileBtn" onclick="openModal()">📄 Profil</button>
-  <div id="profileModal" class="modal">
-    <div class="modal-content">
-      <span class="close" onclick="closeModal()">&times;</span>
-      <h2>📄 Profil (Bio)</h2>
-      <p>👤 <strong>Ismi:</strong> Abdulloh Abdazimov</p>
-      <p>🎓 <strong>Yo'nalish:</strong> Kiberxavfsizlik</p>
-      <p>🏫 <strong>O‘quv yurti:</strong> Alfraganus University</p>
-      <p>🛠 <strong>Ko‘nikmalar:</strong> Server boshqaruvi, MySQL, sun’iy intellekt yaratish (AI generating)</p>
-      <p>🌐 <strong>Ijtimoiy tarmoqlar:</strong></p>
-      <ul>
-        <li>Telegram: <a href="https://t.me/mladshy7" target="_blank">@mladshy7</a></li>
-        <li>Instagram: <a href="https://instagram.com/a.azimv" target="_blank">@a.azimv</a></li>
-      </ul>
+<div id="profileModal" class="modal">
+  <div class="modal-content">
+    <span class="close" onclick="closeModal()">&times;</span>
+    <div style="display: flex; align-items: center; gap: 20px;">
+      <img
+        id="profileImage"
+        src="https://i.pravatar.cc/100"
+        alt="Profil Rasmi"
+        style="width: 100px; height: 100px; border-radius: 50%; object-fit: cover; border: 2px solid #6c5ce7;"
+      />
+      <div>
+        <h2>📄 Profil (Bio)</h2>
+        <p>👤 <strong>Ismi:</strong> Abdulloh Abdazimov</p>
+        <p>🎓 <strong>Yo'nalish:</strong> Kiberxavfsizlik</p>
+        <p>🏫 <strong>O‘quv yurti:</strong> Alfraganus University</p>
+        <p>🛠 <strong>Ko‘nikmalar:</strong> Server boshqaruvi, MySQL, sun’iy intellekt yaratish (AI generating)</p>
+        <p>🌐 <strong>Ijtimoiy tarmoqlar:</strong></p>
+        <ul>
+          <li>Telegram: <a href="https://t.me/mladshy7" target="_blank">@mladshy7</a></li>
+          <li>Instagram: <a href="https://instagram.com/a.azimv" target="_blank">@a.azimv</a></li>
+        </ul>
+      </div>
     </div>
-  </div>
+  </div> <!-- Modal content yakunlandi shu yerda -->
+</div> <!-- Modal yakunlandi shu yerda -->
 
   <div class="container" id="authContainer">
     <div id="loginForm">
