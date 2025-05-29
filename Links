@@ -476,17 +476,17 @@
     }
 
     // Boshlang'ich holatda ro'yxatdan o'tilgan yoki kirilgan bo'lsa ko'rsatish
-    window.onload = function () {
-      const user = localStorage.getItem("user");
-      if (user) {
-        document.getElementById("authContainer").style.display = "none";
-        document.getElementById("diseaseForm").style.display = "block";
-      }
-      renderFoods();
-      showStats();
-      showSuggestion();
-    };
+window.onload = function () {
+  // Dastlab hamma bo‘limlarni yashirish
+  document.getElementById("authContainer").style.display = "block";
+  document.getElementById("diseaseForm").style.display = "none";
+  document.getElementById("mainApp").style.display = "none";
+
+  // Ma'lumotlarni ko'rsatish (agar mavjud bo‘lsa)
+  renderFoods();
+  showStats();
+  showSuggestion();
+};
   </script>
 </body>
 </html>
-
